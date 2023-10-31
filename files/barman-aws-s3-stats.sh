@@ -39,7 +39,7 @@ main() {
             fi
 
             start_time=$(jq -n now)
-            stats_data=$(aws s3api list-objects --bucket "$bucket" --prefix "$prefix" --output json --query "{size: sum(Contents[].Size), count: length(Contents[])}")
+            stats_data=$(aws --endpoint-url=https://s3.storage.selcloud.ru s3api list-objects --bucket "$bucket" --prefix "$prefix" --output json --query "{size: sum(Contents[].Size), count: length(Contents[])}")
             end_time=$(jq -n now)
 
             [[ -d "$stats_dir" ]] || mkdir -p "$stats_dir"

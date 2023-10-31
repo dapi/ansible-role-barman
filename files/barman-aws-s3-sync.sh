@@ -49,7 +49,7 @@ main() {
             esac
 
             start_time=$(jq -n now)
-            if aws s3 sync "$src" "$dest" "${aws_s3_sync_params[@]}"; then
+            if aws --endpoint-url=https://s3.storage.selcloud.ru s3 sync "$src" "$dest" "${aws_s3_sync_params[@]}"; then
                 aws_s3_sync_result=$?
             else
                 aws_s3_sync_result=$?
